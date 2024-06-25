@@ -1,6 +1,5 @@
-//import { border } from '@chakra-ui/react';
 import React from 'react';
-
+import { useState } from 'react';
 const colors = {
   darkNavy: '#020c1b',
   navy: '#0a192f',
@@ -13,35 +12,80 @@ const colors = {
   glowColor: '#09b9ad',
 };
 
-const AddExpense = () => {
-  return (
-      <div style={styles.formContainer}>
-        <div style={styles.form}>
-          <h1 style={styles.title}>Add Your Expense</h1>
+const AddExpense = ({ addExpense }) => {
+  const [description, setDescription] = useState('');
+  const [amount, setAmount] = useState('');
+  const [date, setDate] = useState('');
+  const [sharedWith, setSharedWith] = useState('');
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newExpense = {
+      description,
+      amount,
+      date,
+      sharedWith,
+    };
+    addExpense(newExpense);
+    setDescription('');
+    setAmount('');
+    setDate('');
+    setSharedWith('');
+  };
+
+  return (
+    <div style={styles.formContainer}>
+      <div style={styles.form}>
+        <h1 style={styles.title}>Add Your Expense</h1>
+
+        <form onSubmit={handleSubmit}>
           <div style={styles.formControl}>
             <label htmlFor="description" style={styles.label}>Description</label>
-            <input id="description" type="text" style={styles.input} />
+            <input
+              id="description"
+              type="text"
+              style={styles.input}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
           </div>
 
           <div style={styles.formControl}>
             <label htmlFor="amount" style={styles.label}>Amount</label>
-            <input id="amount" type="number" style={styles.input} />
+            <input
+              id="amount"
+              type="number"
+              style={styles.input}
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+            />
           </div>
 
           <div style={styles.formControl}>
             <label htmlFor="date" style={styles.label}>Date</label>
-            <input id="date" type="date" style={styles.input} />
+            <input
+              id="date"
+              type="date"
+              style={styles.input}
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+            />
           </div>
 
           <div style={styles.formControl}>
             <label htmlFor="sharedWith" style={styles.label}>Shared with</label>
-            <textarea id="sharedWith" style={{ ...styles.input, height: '100px', resize: 'vertical' }} />
+            <textarea
+              id="sharedWith"
+              style={{ ...styles.input, height: '100px', resize: 'vertical' }}
+              value={sharedWith}
+              onChange={(e) => setSharedWith(e.target.value)}
+            />
           </div>
 
-          <button style={styles.button}>Add Expense</button>
-        </div>
+          <button style={styles.button} type="submit">Add Expense</button>
+        </form>
       </div>
+    </div>
   );
 };
 
@@ -52,17 +96,16 @@ const styles = {
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: '16px',
+    padding: '10px',
     width: '100%',
   },
   form: {
     display: 'flex',
     flexDirection: 'column',
     gap: '10px',
-    padding: '16px',
-    alignItems: 'center',
-    maxWidth: '500px',
-    width: '200%',
+    padding: '10px',
+    maxWidth: '400px',
+    width: '100%',
     backgroundColor: colors.lightNavy,
     borderRadius: '10px',
     boxShadow: `0 0 10px ${colors.navyShadow}`,
@@ -84,21 +127,16 @@ const styles = {
   input: {
     backgroundColor: colors.navy,
     color: colors.green,
-    padding: '16px',
+    padding : '16px',
     borderRadius: '5px',
     border: 'none',
-    outline: 'none',
     width: '100%',
     boxShadow: 'none',
     transition: 'box-shadow 0.3s, border 0.3s',
   },
-  inputFocus: {
-    border: `1px solid ${colors.green}`,
-    boxShadow: `0 0 10px ${colors.green}`,
-  },
   button: {
     backgroundColor: colors.green,
-    margin:'20px',
+    margin: '20px',
     color: colors.lightNavy,
     fontWeight: 'bold',
     padding: '16px',
@@ -108,17 +146,8 @@ const styles = {
     cursor: 'pointer',
     transition: 'background-color 0.3s, color 0.3s',
   },
-  buttonHover: {
-    backgroundColor: colors.navy,
-    color: colors.green,
-  },
-  footer: {
-    backgroundColor: colors.darkNavy,
-    color: colors.slate,
-    padding: '8px',
-    textAlign: 'center',
-  },
 };
 
 export default AddExpense;
+
 

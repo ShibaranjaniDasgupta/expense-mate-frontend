@@ -1,27 +1,5 @@
-/*import React from 'react';
-import { Route, Routes } from 'react-router-dom';
-import HomePage from './pages/HomePage';
-import AddExpense from './pages/AddExpense';
-import ExpenseList from './pages/ExpenseList';
-import './styles.css';
-
-const App = () => {
-  return (
-    <div className="App">
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/add-expense" element={<AddExpense />} />
-        <Route path="/expense-list" element={<ExpenseList />} /> 
-      </Routes>
-    </div>
-  );
-};
-
-export default App;*/
-
-
 import React, { useState } from 'react';
-import { Route,Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import HomePage from './pages/HomePage';
 import AddExpense from './pages/AddExpense';
@@ -31,15 +9,25 @@ import Sidebar from './components/Sidebar';
 import Contact from './pages/Contact';
 import About from './pages/About';
 import ProfilePage from './pages/ProfilePage';
-import Email from './pages/Email';
 import './pages/HomePage.css';
 import Notifications from './pages/Notifications';
+import MainContent from './pages/MainContent';
+import CreateNewGroup from './pages/CreateNewGroup';
+import GroupManagement from './pages/GroupManagement';
+import Login from './pages/Login';
+import Register1 from './pages/Register1';
+import Settings from './pages/Settings';
 
 const App = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [expenses, setExpenses] = useState([]);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  const addExpense = (expense) => {
+    setExpenses([...expenses, expense]);
   };
 
   return (
@@ -49,13 +37,18 @@ const App = () => {
       <div className="content">
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path='/About' element={<About/>}></Route>
-          <Route path="/add-expense" element={<AddExpense />} />
-          <Route path="/expense-list" element={<ExpenseList />} />
-          <Route path='/profile' element={<ProfilePage/>}></Route>
-          <Route path='/notifications' element={<Notifications/>}></Route>
-          <Route path='/contact' element={<Contact/>}></Route>
-
+          <Route path="/about" element={<About />} />
+          <Route path="/add-expense" element={<AddExpense addExpense={addExpense} />} />
+          <Route path="/expense-list" element={<ExpenseList expenses={expenses} />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/notifications" element={<Notifications />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/main-content" element={<MainContent />} />
+          <Route path="/create-group" element={<CreateNewGroup />} />
+          <Route path="/group-management" element={<GroupManagement />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register1 />} />
+          <Route path="/setting" element={<Settings />} />
         </Routes>
       </div>
     </div>

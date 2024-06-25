@@ -41,7 +41,7 @@ const HomePage = () => {
         </div>
         <div className="cta-section">
           <h3>Ready to get started?</h3>
-          <a href="/signup" className="cta-button">Sign Up Now</a>
+          <a href="/register" className="cta-button">Sign Up Now</a>
         </div>
       </div>
       <footer className="footer">

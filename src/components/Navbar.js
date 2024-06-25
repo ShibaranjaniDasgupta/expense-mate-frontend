@@ -7,7 +7,7 @@ const Navbar = ({ toggleSidebar }) => {
       <div className='brand-logo'>ExpenseMate</div>
       <ul>
         <li><Link to="/login">Log In</Link></li>
-        <li><Link to="/signup">Sign Up</Link></li>
+        <li><Link to="/register">Sign Up</Link></li>
         <li>
           <button className="hamburger-btn" onClick={toggleSidebar}>
             ☰
